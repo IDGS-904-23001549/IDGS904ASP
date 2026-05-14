@@ -8,5 +8,6 @@ namespace IDGS904ASP.Models
     public class Cine
     {
         public int CantidadBoletos { get; set;  }
+
     }
 }
