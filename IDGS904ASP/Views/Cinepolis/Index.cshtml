@@ -1,0 +1,201 @@
+﻿@model IDGS904ASP.Models.Cine
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cinépolis</title>
+    <style>
+        /* Estilos para igualar la imagen de tu profe */
+        body {
+            background-color: #2b4c9b; /* Azul clásico */
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .contenedor-principal {
+            width: 800px;
+            text-align: center;
+        }
+
+        .titulo-cinepolis {
+            background-color: white;
+            color: black;
+            font-weight: bold;
+            font-style: italic;
+            padding: 5px 20px;
+            display: inline-block;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        fieldset {
+            border: 1px solid white;
+            border-radius: 3px;
+            text-align: left;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        legend {
+            font-style: italic;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 0 5px;
+        }
+
+        .form-row {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+            .form-row label {
+                width: 180px;
+                text-align: right;
+                margin-right: 10px;
+            }
+
+            .form-row input[type="text"],
+            .form-row input[type="number"] {
+                width: 150px;
+            }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+        }
+
+            .radio-group input {
+                margin-left: 10px;
+                margin-right: 5px;
+            }
+
+        .seccion-superior {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .caja-entradas {
+            flex: 2;
+        }
+
+        .caja-salidas {
+            flex: 1;
+        }
+
+        .caja-acciones {
+            width: 40%;
+            margin: 0 auto;
+        }
+
+            .caja-acciones fieldset {
+                text-align: center;
+                display: flex;
+                justify-content: space-around;
+            }
+
+        .btn {
+            padding: 5px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+
+        .logo-placeholder {
+            font-size: 60px;
+            font-weight: bold;
+            margin: 30px 0;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+            .logo-placeholder span {
+                color: #fdd835; /* Estrella amarilla */
+            }
+
+        .subtitulo-logo {
+            font-size: 18px;
+            font-weight: normal;
+            letter-spacing: 4px;
+            margin-top: -10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor-principal">
+
+        <form action="/Cinepolis/Index" method="post">
+            <div class="seccion-superior">
+
+                <div class="caja-entradas">
+                    <fieldset>
+                        <legend>Entradas</legend>
+                        <div class="form-row">
+                            <label>Nombre</label>
+                            <input type="text" name="Nombre" value="" />
+                        </div>
+                        <div class="form-row">
+                            <label>Cantidad Compradores</label>
+                            <input type="number" name="CantidadCompradores" value="" />
+                        </div>
+                        <div class="form-row">
+                            <label>Tarjeta Cineco</label>
+                            <div class="radio-group">
+                                <input type="radio" name="UsaTarjeta" value="Si""/> Si
+                                <input type="radio" name="UsaTarjeta" value="No" /> No
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label>Cantidad De Boletas</label>
+                            <input type="number" name="CantidadBoletos" value="" />
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="caja-salidas">
+                    <fieldset>
+                        <legend>Salidas</legend>
+                        <div class="form-row" style="display: block; text-align: center;">
+                            <label style="width: auto; display: block; margin-bottom: 10px; text-align: center;">Valor a Pagar</label>
+                            <input type="text" readonly value="@(Model?.TotalAPagar > 0 ? "$" + Model?.TotalAPagar : "")" style="text-align: center;" />
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="logo-placeholder">
+                <span>★</span> Cinépolis.
+                <div class="subtitulo-logo">LA CAPITAL DEL CINE</div>
+            </div>
+
+            <div class="caja-acciones">
+                <fieldset>
+                    <legend>Acciones</legend>
+                    <input type="submit" class="btn" value="Procesar" />
+                    <button type="button" class="btn" onclick="window.location.href='/'">Salir</button>
+                </fieldset>
+            </div>
+        </form>
+
+        @if (!string.IsNullOrEmpty(Model?.Mensaje))
+        {
+            <script>
+                alert('@Html.Raw(Model.Mensaje)');
+            </script>
+        }
+    </div>
+</body>
+</html>
+

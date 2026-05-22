@@ -36,5 +36,10 @@ namespace IDGS904ASP.Controllers
             ViewBag.Propiedad = persona;
             return View();
         }
+
+        public ActionResult Listas()
+        {
+            return View();
+        }
     }
 }
